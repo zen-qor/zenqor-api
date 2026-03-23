@@ -1,0 +1,15 @@
+{
+  "name": "zenqor-api",
+  "version": "1.1.0",
+  "description": "API backend zenqor",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js"
+  },
+  "author": "zenqor",
+  "license": "MIT",
+  "dependencies": {
+    "express": "^4.18.2",
+    "dotenv": "^16.0.0"
+  }
+}
