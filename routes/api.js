@@ -1,29 +1,24 @@
 const express = require("express");
 const router = express.Router();
 
-const auth = require("../middleware/auth");
-
 router.get("/status", (req, res) => {
-  res.json({
-    status: "online",
-    developer: "zenqor"
-  });
-});
-
-router.get("/secure-data", auth, (req, res) => {
-  res.json({
-    message: "Secure data access granted"
-  });
+  res.json({ status: "ok", timestamp: Date.now() });
 });
 
 router.get("/projects", (req, res) => {
   res.json([
-    {
-      name: "zenqor-api",
-      type: "backend",
-      status: "active"
-    }
+    { name: "Project A", status: "active", type: "web" },
+    { name: "Project B", status: "inactive", type: "api" }
   ]);
+});
+
+router.get("/secure-data", (req, res) => {
+  const key = req.headers["x-api-key"];
+  if (key === "zenqor123") {
+    res.json({ secret: "Zenqor secure data" });
+  } else {
+    res.status(401).json({ error: "Unauthorized" });
+  }
 });
 
 module.exports = router;
